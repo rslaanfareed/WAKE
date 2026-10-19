@@ -29,12 +29,18 @@ button.go:hover{transform:translateY(-2px)}
 .rl p{margin:0}.rl ul{margin:0;padding-left:18px}.rl li{margin:3px 0}.rl b{color:var(--ink);font-weight:600}
 .rl kbd{background:#ffffff1a;border:1px solid var(--line);border-radius:5px;padding:0 6px;font-size:12px;color:var(--ink)}
 button.go.alt{background:#ffffff1c;color:var(--ink);box-shadow:none}
+html,body{overscroll-behavior:none}body{position:fixed;inset:0;-webkit-touch-callout:none}
+.ov{overflow-y:auto;overflow-x:hidden}.panel{margin:auto}
+#ph{width:96px;height:96px;font-size:13px;font-weight:700;color:#e8ffff;border:2px solid #7df9ff88;background:conic-gradient(#7df9ff66 calc(var(--p,1)*360deg),#ffffff14 0);box-shadow:0 0 22px #7df9ff33;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 26px)}
+#ph:active{transform:scale(.94)}
+@media (pointer:coarse){#tools{left:50%;bottom:auto;top:calc(env(safe-area-inset-top,0px) + 8px);transform:translateX(-50%)}#tools button{width:46px;height:46px}}
+@media (max-width:520px){.panel{padding:20px 16px;border-radius:18px}h1{font-size:44px;letter-spacing:.22em;padding-left:.22em}.legend{font-size:12.5px;gap:6px 10px}.rl{max-height:58vh}.big{font-size:44px}.tag{font-size:14px}}
 .hide{display:none!important}
 </style></head><body>
 <canvas id="c"></canvas><button id="ph">PHASE</button>
 <div id="tools"><button id="pb" title="Pause (P)">❚❚</button><button id="rb" title="Rules (H)">?</button></div>
 <div class="ov" id="menu"><div class="panel"><h1>WAKE</h1><p class="tag">Your past is hunting you. Use it.</p>
-<div class="legend"><b>Move</b><span>Mouse, finger or WASD. You leave a wake.</span><b>👻 Echo</b><span>It retraces your exact path, a few seconds late. Touch it and you're gone.</span><b>💥 Wisps</b><span>They chase you. Lead them along your wake so your echo sweeps them up. Each kill chain-reacts.</span><b>🟡 Orbs</b><span>Collect them for points. Every few summon another, deadlier echo.</span><b>Space / click</b><span>Phase: pass through anything for a moment (short cooldown)</span></div>
+<div class="legend"><b>Move</b><span>Mouse or WASD. On a phone, touch anywhere to summon a joystick. You leave a wake.</span><b>👻 Echo</b><span>It retraces your exact path, a few seconds late. Touch it and you're gone.</span><b>💥 Wisps</b><span>They chase you. Lead them along your wake so your echo sweeps them up. Each kill chain-reacts.</span><b>🟡 Orbs</b><span>Collect them for points. Every few summon another, deadlier echo.</span><b>Space / click</b><span>Phase: pass through anything for a moment. On a phone: the PHASE button, or tap with a second finger</span></div>
 <button class="go" id="start">Enter the wake</button></div></div>
 <div class="ov hide" id="pz"><div class="panel"><h1 style="font-size:40px;letter-spacing:.2em">PAUSED</h1><p class="tag">The wake holds its breath.</p><button class="go" id="rs">Resume</button><br><button class="go alt" id="rl2">Rules</button> <button class="go alt" id="rt">Restart</button></div></div>
 <div class="ov hide" id="rules"><div class="panel"><h1 style="font-size:34px;letter-spacing:.2em">RULES</h1><div class="rl">
@@ -43,8 +49,8 @@ button.go.alt{background:#ffffff1c;color:var(--ink);box-shadow:none}
 <h3>Enemies</h3><ul><li><b>Wisps</b> (pink) home in on you. They appear as faint rings for about a second before they can hurt you or be killed.</li><li><b>Brutes</b> (orange hexagons, after about 22 seconds) are slower and take two echo hits.</li><li>The longer you survive, the faster and more frequent they get.</li></ul>
 <h3>Chains and score</h3><ul><li>Every wisp your echo sweeps scores points. Each explosion also destroys wisps nearby, so chain reactions give bonus points.</li><li>Quick kills raise your multiplier from ×1 up to ×12. It resets after 2.2 seconds with no kill.</li><li>You also earn a little for every second you stay alive.</li></ul>
 <h3>Orbs</h3><ul><li>Gold orbs give points and keep your multiplier alive.</li><li>5 orbs awaken a second echo (violet, 4.8 s behind you). 12 orbs awaken a third (gold, 7.2 s behind). More echoes mean more killing power but more danger.</li></ul>
-<h3>Phase</h3><ul><li>Press <kbd>Space</kbd>, click, or tap PHASE to become intangible for 0.75 seconds and pass through enemies and echoes. The cooldown is 4 seconds, shown as a ring around you.</li></ul>
-<h3>Controls</h3><ul><li><b>Move:</b> mouse, finger drag, or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / arrow keys</li><li><b>Pause:</b> <kbd>P</kbd> or <kbd>Esc</kbd> · <b>Rules:</b> <kbd>H</kbd> or <kbd>?</kbd> · <b>Restart after death:</b> <kbd>Enter</kbd></li></ul>
+<h3>Phase</h3><ul><li>Press <kbd>Space</kbd>, click, tap PHASE, or tap with a second finger to become intangible for 0.75 seconds and pass through enemies and echoes. The cooldown is 4 seconds, shown as a ring around you.</li></ul>
+<h3>Controls</h3><ul><li><b>Move:</b> mouse, <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / arrow keys, or on a phone touch and drag anywhere to summon a joystick</li><li><b>Pause:</b> <kbd>P</kbd> or <kbd>Esc</kbd> · <b>Rules:</b> <kbd>H</kbd> or <kbd>?</kbd> · <b>Restart after death:</b> <kbd>Enter</kbd></li></ul>
 <h3>Tips</h3><ul><li>Run in wide loops. Tight circles run you into your own echo.</li><li>Gather wisps behind you, then curve away so your echo sweeps through them.</li><li>Save Phase for when an echo and a swarm close in together.</li></ul></div>
 <button class="go" id="rc">Got it</button></div></div>
 <div class="ov hide" id="over"><div class="panel"><p class="tag" id="ot" style="margin:0">Caught by your own past</p><div class="big" id="sc">0</div><p class="tag" id="nb" style="margin:0 0 6px"></p>
@@ -56,7 +62,7 @@ let W,H,D=1;function size(){D=devicePixelRatio||1;W=innerWidth;H=innerHeight;cv.
 let best=0;try{best=+localStorage.getItem('wake_best')||0}catch(e){}
 const EC=['#7df9ff','#c084fc','#ffd86b'],DL=[2.4,4.8,7.2];
 let st='menu',t,P,hist,ne,en,orbs,parts,rings,texts,boom,score,mult,multT,chain,bestChain,kills,orbN,shake,flash,spT,orT,dead,dyT,pulse,hintT;
-const keys={};let ptr={x:0,y:0,on:false,mouse:false};let paused=false,rulesOpen=false,resumeT=0,wasRun=false;
+const keys={};let ptr={x:0,y:0,on:false,mouse:false};let paused=false,rulesOpen=false,resumeT=0,wasRun=false;const TOUCH=matchMedia('(pointer:coarse)').matches,JR=58;let joy={id:null,bx:0,by:0,x:0,y:0};addEventListener('contextmenu',e=>e.preventDefault());
 function reset(){t=0;P={x:W/2,y:H*.6,vx:0,vy:0,ph:0,cd:0};hist=[{t:0,x:P.x,y:P.y}];ne=1;en=[];orbs=[];parts=[];rings=[];texts=[];boom=[];score=0;mult=1;multT=0;chain=0;bestChain=0;kills=0;orbN=0;shake=0;flash=0;spT=1.2;orT=.5;dead=false;dyT=0;pulse=0;hintT=7}
 reset();
 // audio
@@ -71,9 +77,9 @@ addEventListener('keydown',e=>{const k=KN(e.key);keys[k]=true;ptr.mouse=false;if
  if(paused){if(k===' '||k==='Enter')togglePause();return}
  if(st!=='play'){if(k==='Enter'||k===' '||k==='r')begin()}else if(k===' '||k==='Shift')phase()});
 addEventListener('keyup',e=>{keys[KN(e.key)]=false});
-cv.onpointermove=e=>{ptr.x=e.clientX;ptr.y=e.clientY;if(e.pointerType==='mouse')ptr.mouse=true};
-cv.onpointerdown=e=>{ptr.x=e.clientX;ptr.y=e.clientY;ptr.on=true;if(e.pointerType==='mouse'){ptr.mouse=true;if(st==='play')phase()}else{ptr.mouse=false;cv.setPointerCapture(e.pointerId)}};
-cv.onpointerup=cv.onpointercancel=e=>{if(e.pointerType!=='mouse')ptr.on=false};
+cv.onpointermove=e=>{if(e.pointerType==='mouse'){ptr.x=e.clientX;ptr.y=e.clientY;ptr.mouse=true}else if(e.pointerId===joy.id){joy.x=e.clientX;joy.y=e.clientY;const dx=joy.x-joy.bx,dy=joy.y-joy.by,d=Math.hypot(dx,dy);if(d>JR){joy.bx+=dx/d*(d-JR);joy.by+=dy/d*(d-JR)}}};
+cv.onpointerdown=e=>{if(e.pointerType==='mouse'){ptr.x=e.clientX;ptr.y=e.clientY;ptr.mouse=true;if(st==='play')phase()}else{ptr.mouse=false;try{cv.setPointerCapture(e.pointerId)}catch(x){}if(joy.id===null){joy={id:e.pointerId,bx:e.clientX,by:e.clientY,x:e.clientX,y:e.clientY}}else if(st==='play')phase()}};
+cv.onpointerup=cv.onpointercancel=e=>{if(e.pointerId===joy.id)joy.id=null};
 $('#ph').onpointerdown=e=>{e.stopPropagation();phase()};
 $('#start').onclick=begin;$('#again').onclick=begin;
 function togglePause(){if(st!=='play'||dead||rulesOpen)return;paused=!paused;$('#pz').classList.toggle('hide',!paused);$('#pb').textContent=paused?'▶':'❚❚';if(!paused)resumeT=2.4}
@@ -83,8 +89,8 @@ function toggleRules(){rulesOpen=!rulesOpen;$('#rules').classList.toggle('hide',
 function cd(){g.textAlign='center';g.fillStyle='#fff';g.shadowColor='#7df9ff';g.shadowBlur=24;g.font='700 96px Georgia,serif';g.globalAlpha=.9;g.fillText(Math.ceil(resumeT/.8),W/2,H/2+30);g.globalAlpha=1;g.shadowBlur=0}
 $('#pb').onclick=togglePause;$('#rb').onclick=toggleRules;$('#rc').onclick=toggleRules;$('#rs').onclick=togglePause;$('#rl2').onclick=toggleRules;$('#rt').onclick=begin;
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&st==='play'&&!paused&&!dead&&!rulesOpen)togglePause()});
-function begin(){aud();reset();st='play';paused=false;resumeT=0;wasRun=false;$('#pz').classList.add('hide');$('#pb').textContent='❚❚';$('#menu').classList.add('hide');$('#over').classList.add('hide')}
-function phase(){if(st!=='play'||dead||paused||resumeT>0||P.cd>0)return;P.ph=.75;P.cd=4;bp(300,.3,'triangle',.08,3);rings.push({x:P.x,y:P.y,r:10,v:260,l:0,m:.4,c:'#ffffff'})}
+function begin(){aud();reset();st='play';joy.id=null;paused=false;resumeT=0;wasRun=false;$('#pz').classList.add('hide');$('#pb').textContent='❚❚';$('#menu').classList.add('hide');$('#over').classList.add('hide')}
+function phase(){if(st!=='play'||dead||paused||resumeT>0||P.cd>0)return;P.ph=.75;P.cd=4;try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}bp(300,.3,'triangle',.08,3);rings.push({x:P.x,y:P.y,r:10,v:260,l:0,m:.4,c:'#ffffff'})}
 // helpers
 function at(tt){if(tt<=hist[0].t)return hist[0];let j=hist.length-1;while(j>0&&hist[j-1].t>tt)j--;if(j===0)return hist[0];const a=hist[j-1],b=hist[j],k=(tt-a.t)/((b.t-a.t)||1);return{x:a.x+(b.x-a.x)*k,y:a.y+(b.y-a.y)*k}}
 function burst(x,y,n,c,sp=220,s=3){for(let i=0;i<n;i++){const a=R()*6.283,v=rr(20,sp);parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:0,m:rr(.4,1),c,s:rr(1,s)})}}
@@ -96,7 +102,7 @@ function kill(e,d=0){if(e.dead||e.born>0)return;if(e.hp>1){e.hp--;e.inv=.5;burst
  burst(e.x,e.y,e.big?36:20,e.big?'#ffb86b':'#ff4d8d',e.big?300:240,3.5);rings.push({x:e.x,y:e.y,r:4,v:170,l:0,m:.45,c:d?'#ffd86b':'#ff4d8d'});
  say('+'+pts,e.x,e.y-12,d?'#ffd86b':'#ffd0e0',d?18:14);shake=Math.min(1,shake+.06+d*.02);bp(180+Math.min(chain,30)*22,.14,'triangle',.06,.5);
  boom.push({x:e.x,y:e.y,at:t+.07,d:d+1})}
-function die(){if(dead)return;dead=true;dyT=0;burst(P.x,P.y,90,'#fff3b0',460,4);for(let i=0;i<3;i++)rings.push({x:P.x,y:P.y,r:6,v:300+i*160,l:0,m:.8,c:i?'#7df9ff':'#fff'});shake=1;flash=1;bp(120,.7,'sawtooth',.12,.2)}
+function die(){if(dead)return;dead=true;dyT=0;try{navigator.vibrate&&navigator.vibrate([40,30,90])}catch(e){}burst(P.x,P.y,90,'#fff3b0',460,4);for(let i=0;i<3;i++)rings.push({x:P.x,y:P.y,r:6,v:300+i*160,l:0,m:.8,c:i?'#7df9ff':'#fff'});shake=1;flash=1;bp(120,.7,'sawtooth',.12,.2)}
 function finish(){st='over';score=Math.floor(score);const nb=score>best;if(nb){best=score;try{localStorage.setItem('wake_best',best)}catch(e){}}
  $('#sc').textContent=score.toLocaleString();$('#nb').textContent=nb?'✨ New best!':'Best '+best.toLocaleString();$('#k').textContent=kills;$('#ch').textContent=bestChain;$('#tm').textContent=Math.floor(t)+'s';$('#or').textContent=orbN;$('#over').classList.remove('hide')}
 // update
@@ -107,7 +113,8 @@ function update(dt,auto){
  if(auto){const px=W/2+Math.cos(t*.7)*W*.28,py=H*.52+Math.sin(t*1.1)*H*.22;tx=(px-P.x)*6;ty=(py-P.y)*6}
  else{const kx=(keys.ArrowRight||keys.d?1:0)-(keys.ArrowLeft||keys.a?1:0),ky=(keys.ArrowDown||keys.s?1:0)-(keys.ArrowUp||keys.w?1:0);
   if(kx||ky){const m=Math.hypot(kx,ky);tx=kx/m*340;ty=ky/m*340}
-  else if(ptr.on||ptr.mouse){const dx=ptr.x-P.x,dy=ptr.y-P.y,d=Math.hypot(dx,dy);if(d>6){const s=Math.min(380,d*7);tx=dx/d*s;ty=dy/d*s}}}
+  else if(joy.id!==null){const dx=joy.x-joy.bx,dy=joy.y-joy.by,d=Math.hypot(dx,dy);if(d>6){const m=cl((d-6)/50,0,1);tx=dx/d*380*m;ty=dy/d*380*m}}
+  else if(ptr.mouse){const dx=ptr.x-P.x,dy=ptr.y-P.y,d=Math.hypot(dx,dy);if(d>6){const s=Math.min(380,d*7);tx=dx/d*s;ty=dy/d*s}}}
  P.vx+=(tx-P.vx)*Math.min(1,dt*12);P.vy+=(ty-P.vy)*Math.min(1,dt*12);P.x=cl(P.x+P.vx*dt,14,W-14);P.y=cl(P.y+P.vy*dt,14,H-14);
  if(P.ph>0)P.ph-=dt;if(P.cd>0)P.cd-=dt;
  hist.push({t,x:P.x,y:P.y});while(hist.length>2&&hist[1].t<t-8)hist.shift();
@@ -116,7 +123,7 @@ function update(dt,auto){
  if(auto){fx(dt);return}
  // spawns
  spT-=dt;if(spT<=0&&!dead){spT=Math.max(.42,1.6-t*.012);const n=Math.min(6,1+Math.floor(R()*(1+t/22))),side=R()*4|0,sx=side<2?(side?W+20:-20):rr(0,W),sy=side>=2?(side===2?-20:H+20):rr(0,H);
-  for(let i=0;i<n&&en.length<70;i++){const big=t>22&&R()<Math.min(.3,(t-22)/160);en.push({x:sx+rr(-40,40),y:sy+rr(-40,40),a:Math.atan2(H/2-sy,W/2-sx),born:.9,hp:big?2:1,big,inv:0,sp:(big?.8:1)*(68+Math.min(120,t*1.3))*rr(.85,1.15)})}}
+  for(let i=0;i<n&&en.length<70;i++){const big=t>22&&R()<Math.min(.3,(t-22)/160);en.push({x:sx+rr(-40,40),y:sy+rr(-40,40),a:Math.atan2(H/2-sy,W/2-sx),born:.9,hp:big?2:1,big,inv:0,sp:(big?.8:1)*(68+Math.min(120,t*1.3))*rr(.85,1.15)*cl(Math.min(W,H)/700,.72,1)})}}
  orT-=dt;if(orT<=0&&orbs.length<(t>20?3:2)&&!dead){orbs.push({x:rr(60,W-60),y:rr(80,H-60),p:R()*6,l:0});orT=rr(1.2,2.4)}
  // enemies
  for(const e of en){if(e.born>0){e.born-=dt;continue}if(e.inv>0)e.inv-=dt;const a=Math.atan2(P.y-e.y,P.x-e.x);let da=((a-e.a+9.4248)%6.2832)-3.1416;e.a+=cl(da,-dt*(e.big?1.4:2.3),dt*(e.big?1.4:2.3));
@@ -129,7 +136,7 @@ function update(dt,auto){
  for(const b of boom.filter(b=>t>=b.at)){for(const e of en)if(!e.dead&&e.born<=0&&Math.hypot(e.x-b.x,e.y-b.y)<58)kill(e,b.d);}
  boom=boom.filter(b=>t<b.at);en=en.filter(e=>!e.dead);
  // orbs
- for(const o of orbs){o.l+=dt;if(!dead&&Math.hypot(o.x-P.x,o.y-P.y)<24){o.got=1;orbN++;const pts=Math.round(30*mult);score+=pts;multT=Math.max(multT,1.6);burst(o.x,o.y,26,'#ffd86b',260,3);rings.push({x:o.x,y:o.y,r:6,v:240,l:0,m:.5,c:'#ffd86b'});say('+'+pts,o.x,o.y-14,'#ffd86b',16);bp(740+orbN*14,.22,'sine',.08,1.8);
+ for(const o of orbs){o.l+=dt;if(!dead&&Math.hypot(o.x-P.x,o.y-P.y)<(TOUCH?32:24)){o.got=1;orbN++;const pts=Math.round(30*mult);score+=pts;multT=Math.max(multT,1.6);burst(o.x,o.y,26,'#ffd86b',260,3);rings.push({x:o.x,y:o.y,r:6,v:240,l:0,m:.5,c:'#ffd86b'});say('+'+pts,o.x,o.y-14,'#ffd86b',16);bp(740+orbN*14,.22,'sine',.08,1.8);
    if((orbN===5&&ne<2)||(orbN===12&&ne<3)){ne++;say('ANOTHER ECHO AWAKENS',W/2,H*.3,EC[ne-1],24);flash=.6;shake=.5;bp(220,.6,'sawtooth',.08,2.5);for(let r=0;r<3;r++)rings.push({x:P.x,y:P.y,r:6,v:280+r*120,l:0,m:.9,c:EC[ne-1]})}}}
  orbs=orbs.filter(o=>!o.got);
  score+=dt*2*mult;fx(dt);
@@ -174,12 +181,17 @@ function draw(menu){
  if(flash>0){g.fillStyle=`rgba(255,255,255,${flash*.35})`;g.fillRect(-20,-20,W+40,H+40)}
  g.setTransform(D,0,0,D,0,0);
  if(!menu)hud()}
-function hud(){g.textAlign='left';g.fillStyle='#fff';g.font='700 34px Georgia,serif';g.shadowColor='#7df9ff';g.shadowBlur=12;g.fillText(Math.floor(score).toLocaleString(),18,46);g.shadowBlur=0;
+function drawJoy(){if(TOUCH)$('#ph').style.setProperty('--p',P.cd>0?1-P.cd/4:1);
+ if(joy.id!==null){const dx=joy.x-joy.bx,dy=joy.y-joy.by,d=Math.hypot(dx,dy)||1,m=Math.min(d,JR),kx=joy.bx+dx/d*m,ky=joy.by+dy/d*m;
+  g.save();g.strokeStyle='rgba(125,249,255,.45)';g.lineWidth=2;g.fillStyle='rgba(125,249,255,.07)';g.beginPath();g.arc(joy.bx,joy.by,JR,0,7);g.fill();g.stroke();
+  const q=g.createRadialGradient(kx,ky,0,kx,ky,36);q.addColorStop(0,'rgba(200,255,255,.9)');q.addColorStop(1,'rgba(125,249,255,0)');g.fillStyle=q;g.beginPath();g.arc(kx,ky,36,0,7);g.fill();g.fillStyle='#e8ffff';g.beginPath();g.arc(kx,ky,15,0,7);g.fill();g.restore()}
+ else if(TOUCH&&!paused&&t<12){const x=JR+44,y=H-JR-100,a=.22+.14*Math.sin(t*4);g.strokeStyle=`rgba(125,249,255,${a})`;g.fillStyle=`rgba(125,249,255,${a})`;g.lineWidth=2;g.beginPath();g.arc(x,y,JR,0,7);g.stroke();g.beginPath();g.arc(x+Math.sin(t*2)*14,y,14,0,7);g.fill();g.textAlign='center';g.font='600 12px system-ui';g.fillText('drag anywhere to steer',x,y+JR+20)}}
+function hud(){drawJoy();g.textAlign='left';g.fillStyle='#fff';g.font='700 34px Georgia,serif';g.shadowColor='#7df9ff';g.shadowBlur=12;g.fillText(Math.floor(score).toLocaleString(),18,46);g.shadowBlur=0;
  if(mult>1){g.fillStyle='#ffd86b';g.font='700 22px Georgia,serif';g.fillText('×'+mult,18,74);g.fillStyle='#ffffff25';g.fillRect(58,62,80,5);g.fillStyle='#ffd86b';g.fillRect(58,62,80*cl(multT/2.2,0,1),5)}
  g.textAlign='right';g.fillStyle='#9aa6cf';g.font='12px system-ui';g.fillText('BEST '+best.toLocaleString(),W-18,24);
  g.font='13px system-ui';g.fillStyle='#fff';g.fillText('ECHOES  '+'◉'.repeat(ne)+'○'.repeat(3-ne),W-18,46);
  const nx=ne<2?5:ne<3?12:null;g.fillStyle='#ffd86b';g.fillText(nx?`orbs ${orbN}/${nx} → new echo`:'orbs '+orbN,W-18,66);
- if(hintT>0&&!dead){g.textAlign='center';g.globalAlpha=cl(hintT,0,1);g.fillStyle='#fff';g.font='600 15px Georgia,serif';g.fillText(t<DL[0]?'Your echo awakens soon. Keep moving.':'Lead wisps through your own wake. Let your echo catch them.',W/2,H-34);g.globalAlpha=1}}
+ if(hintT>0&&!dead){g.textAlign='center';g.globalAlpha=cl(hintT,0,1);g.fillStyle='#fff';g.font='600 '+Math.min(15,W/27)+'px Georgia,serif';g.fillText(t<DL[0]?'Your echo awakens soon. Keep moving.':'Lead wisps through your own wake. Let your echo catch them.',W/2,H-34);g.globalAlpha=1}}
 let last=0;
 function frame(ts){let dt=Math.min(.04,(ts-last)/1000||0);last=ts;
  if(st==='play'){if(paused){draw(false)}else if(resumeT>0){resumeT-=dt;draw(false);cd()}else{if(dead&&dyT<.6)dt*=.3;update(dt,false);draw(false)}}
